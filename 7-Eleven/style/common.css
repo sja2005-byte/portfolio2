@@ -239,6 +239,7 @@ article p {
     margin: 0 auto;
     /* margin-top: 100px; */
     padding-bottom: 50px;
+    background-color: #e63939;
 }
 .features h2{
     font-size: 3em;
@@ -594,13 +595,14 @@ tr {
 #SNS ul{
     padding: 10px 0 0;
     display: flex;
-    justify-content: space-between;
+    text-align: center;
     margin-bottom: 0;
 }
 #SNS ul li{
     margin-left: 0;
     flex: 1 1;
     margin: 10px; list-style: none;
+    justify-content: center;
 }
 #SNS ul li a{
     display: block;
@@ -610,15 +612,15 @@ tr {
     overflow: hidden;
 }
 .social_image{
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat;
     position: relative;
     padding-top: 112% !important;
     background-position: 50% !important;
     background-size: cover !important;
-    transition: all .1sease-in-out;
+    background-color: #999; */
 }
 .social_image img{
-    position: absolute;
+    /* position: absolute;
     height: 100%;
     width: 100%;
     inset: 0px;
@@ -626,10 +628,10 @@ tr {
     object-position: center center;
     color: transparent;
     vertical-align: middle;
-    border-style: none;
+    border-style: none; */
 }
 #SNS .SNS_tittle {
-    background: #000;
+    /* background: #000;
     padding: 3px;
     position: absolute;
     bottom: 5%;
@@ -641,10 +643,10 @@ tr {
     align-items: center;
     align-content: center;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap; */
 }
 #SNS .SNS_tittle span{
-    transform: translateY(-2px);
+    /* transform: translateY(-2px);
         padding-left: 4px;
         font-size: 18px;
         padding-left: 10px;
@@ -652,7 +654,7 @@ tr {
     text-transform: uppercase;
     display: inline-block;
     line-height: 2em;
-    color: #fff;
+    color: #fff; */
 }
 
 /* Footer */
@@ -702,5 +704,4 @@ footer {
 
 .logo_footer {
     margin-top: 20px;
-
 }
