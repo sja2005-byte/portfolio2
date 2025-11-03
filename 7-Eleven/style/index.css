@@ -1,0 +1,92 @@
+/* 기본 스타일 설정 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+/* 제목 스타일 */
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* '모두보기' 버튼 스타일 */
+.view_more {
+    text-align: right;
+    margin: 10px 20px;
+}
+
+.view_more a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #0073e6;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+.view_more a span:last-child {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #0073e6;
+    border-bottom: 2px solid #0073e6;
+    transform: rotate(-45deg);
+    margin-left: 5px;
+}
+
+/* 제품 목록 스타일 */
+.product_List {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product_List ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.product_List li {
+    width: calc(20% - 10px); /* 5개 항목을 균등 배치 */
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.product_List img {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.product_List li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+/* 호버 효과 */
+.product_List li:hover img {
+    transform: scale(1.1);
+}
+
+.product_List li p {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
