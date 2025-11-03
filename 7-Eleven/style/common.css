@@ -11,7 +11,7 @@
     background: no-repeat center / cover
    }
 
-#slider li.slider1 { background-image: url(../images/bg1.jpg) }
+#slider li.slider1 { background-image: url(../bg1.jpg) }
 #slider li.slider2 { background-image: url(../images/bg2.jpg) }
 #slider li.slider3 { background-image: url(../images/bg3.jpg) }
 
@@ -702,4 +702,5 @@ footer {
 
 .logo_footer {
     margin-top: 20px;
+
 }
