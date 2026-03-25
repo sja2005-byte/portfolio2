@@ -1,0 +1,123 @@
+@charset "utf-8";
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  height: 70px;
+  border-bottom: 3px solid var(--green);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+}
+
+/* Logo */
+#logo {
+  flex-shrink: 0;
+}
+ 
+#logo a {
+  display: flex;
+  align-items: center;
+}
+ 
+#logo img {
+  height: 40px;
+  filter: brightness(0) invert(1);
+  transition: var(--transition);
+}
+
+/* Navigation */
+#nav {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+}
+ 
+.gnlList {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.gnlList li {
+    position: relative;
+}
+.gnlList li a {
+  display: block;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--gray-mid);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.gnlList > li > .Submenu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 160px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid #F0F0F0;
+  animation: dropIn 0.2s ease;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.gnlList > li:hover > .Submenu {
+  display: block;
+}
+
+.Submenu li a {
+
+}
+
+.Submenu li a:hover {
+  
+}
+
+
+/* Utility Nav */
+.depth {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.depth li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius-xl);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: var(--transition);
+  color: var(--gray-mid);
+}
+.depth li a img {
+  height: 22px;
+  filter: brightness(0) invert(0.7);
+  transition: var(--transition);
+}
+.goLogin {
+  background: var(--green);
+  color: var(--gray-mid);
+}
