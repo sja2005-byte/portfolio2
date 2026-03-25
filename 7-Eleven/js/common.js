@@ -1,12 +1,56 @@
 // Header
-$(document).ready(function () {
-    $('#nav ul li').mouseover(function () {
-        $(this).find('Submenu').slideDown()
-    })
-    $('#nav ul li').mouseout(function () {
-        $(this).find('Submenu').slideUp()
-    })
-})
+// $(document).ready(function () {
+//     $('#nav ul li').mouseover(function () {
+//         $(this).find('.Submenu').slideDown()
+//     })
+//     $('#nav ul li').mouseout(function () {
+//         $(this).find('.Submenu').slideUp()
+//     })
+// })
+
+// Header2
+
+// $(function () {
+//   $(".nav > ul > li").mouseover(function () {
+//     $(".nav > ul > li > ul").stop().slideDown(200);
+//   });
+
+//   $(".nav > ul > li").mouseout(function () {
+//     $(".nav > ul > li > ul").stop().slideUp(200);
+//   });
+// });
+
+//Header3
+
+// $(function(){
+//     $(".nav > ul > li").mouseover(function(){
+//         $(".nav > ul > li > ul").stop().slideDown(900);
+//         $("header").addClass("on");
+//     });
+
+//     $(".nav > ul > li").mouseout(function(){
+//         $(".nav > ul > li > ul").stop().slideUp(100);
+//         $("header").removeClass("on");
+//     });
+// })
+
+// Nav
+$(function () {
+ 
+  // ── 서브메뉴 열기 / 닫기 ──────────────────────────────
+  // gnlList의 각 li에 마우스가 들어오면 자식 ul을 보여줌
+ 
+  $(".gnlList > li").on("mouseenter", function () {
+    // 현재 li의 직계 자식 ul (서브메뉴) 를 찾아서 보여줌
+    $(this).children("ul, .gmlSub").stop(true, true).slideDown(200);
+  });
+ 
+  $(".gnlList > li").on("mouseleave", function () {
+    // 마우스가 떠나면 서브메뉴 숨김
+    $(this).children("ul, .gmlSub").stop(true, true).slideUp(150);
+  });
+ 
+});
 
 // slaider
 // $(function () {
