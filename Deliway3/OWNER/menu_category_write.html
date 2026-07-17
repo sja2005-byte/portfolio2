@@ -1,0 +1,40 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="category.php">
+        <input type="hidden" name="cate_userid" value="<?php echo $_SESSION['user_id'];?>">
+        <input type="hidden" name="user_idx" value="<?php echo $_SESSION['user_idx'];?>">
+        <input type="hidden" name="store_idx" value="<?php echo $_SESSION['store_idx'];?>">
+    <h1>메뉴 관리</h1>
+    카테고리 : <select name="menu_category" id="">
+    <option value="">-선택-</option>
+    <?php
+    $sqk = "select * from menu_category where cate_userid='".$_SESSION['user_id']."'";
+    $result = mysqli_query($con,$sql);
+    while ($row = mysqli_fetch_array($result)){
+        ?>
+        <option value="<?php echo $row['cate_name'];?>"><?php echo $row['cate_name'];?></option>
+        <?php
+    }
+    ?>
+    </select>
+    메뉴명 : <input type="text" name="store_menu_name">
+    메뉴가격 : <input type="number" name="store_menu_cost">
+    메뉴설명 : <input type="text" name="store_menu_memo">
+
+    <input type="submit" value="메뉴등록">
+    <form method="post" action="category.php">
+    <input type="text" name="cate_userid" value="<?php echo $_SESSION['user_id'];?>">
+    <h1>카테고리 등록</h1>
+    카테고리 명 : <input type="text" name="cate_name"><br>
+    </form>
+</body>
+</html>

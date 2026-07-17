@@ -1,0 +1,55 @@
+<?php
+session_start();
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" action="owner_store" >
+    <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'];?>">
+    <input type="hidden" name="user_idx" value="<?php echo $_SESSION['user_idx'];?>">
+    <input type="hidden" name="store_idx" value="<?php echo $_SESSION['store_idx'];?>">
+    <a href="search_res_de.html?var1=$var2=$dis=1.0">1km이내</a>
+
+    <?php
+    $var1 = $_GET['var1'];
+    $var2 = $_GET['var2'];
+
+    if ($var1 == ""){
+        $sql = "select * from store order by store_idx desc";
+    } else {
+        $sql = "SELECT *, (6371 * acos(cos(radians(35.8730441)) * cos(radians(store_lat))
+         * cos(radians(store_lng)) - radians(128.6392094)) + sin(radians(35.8730441)))
+         * sin(radians(store_lat)))) AS distance FROM store ORDER BY distance;
+    }
+    $result = mysqli_query($con, $sql);
+    ?>
+
+    <?php
+    while($row = mysqli_fetch_array($result)){
+
+    $lat = $row['store_lat'];
+    $lng = $row['store_lng'];
+
+    $sql1 = "SELECT *, (6371 * acos(cos(radians(35.8730441)) * cos(radians($lat)) * cos(radians($lng)) - 
+    radians(128.6392094)) + sin(radians(35.8730441))*sin(radians($lat))) AS distance FROM store";
+    
+    $result1 = myseli_query($con, $sql1);
+    $row1 = mysqli_fetch_array($result1)
+    ORDER BY distance;"
+    ?>
+
+    <?php if ($row1['distance']> "3.0"){
+
+    }
+    <p><?php echo $row['store_name'];?> / 현재 위치에서 <?php echo round($row1['distance'],1) km이내</p>
+    }
+
+    SELECT (6371 * acos(cos(radians(35.8730441))*cos(radians(35.8763549982294))*cos(radians(128.679626171312)-
+    radians(128.6392094))+sin(radians((35.8730441)))*sin(radians(35.8763549982294)) )) AS distance
+</body>
+</html>
