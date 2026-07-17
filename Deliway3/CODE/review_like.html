@@ -1,0 +1,30 @@
+<?php
+session_start();
+include "config/db.php";
+
+$store_idx = $_GET['store_idx'];
+$user_idx = $_GET['user_idx'];
+$reser_idx = $_GET['reser_idx'];
+$reivew_idx = $_GET['reivew_idx'];
+$user_like = $_GET['user_like'];
+
+$sql = "select * from reivew_like where user_idx='".$user_idx."' and reser_idx= '".$reser_idx."' and review_idx= '".$review_idx."' and review_idx= '".$review_idx."' and store_idx='".$store_idx"' ";
+
+$result = mysqli_query($con, $sql);
+$row = mysqli_num_rows($result);
+
+if($row == 0){
+    $sql = "insert into review_like (user_idx, store_idx, reser_idx, user_like, reivew_idx)
+    values (".user_idx.",".store_idx.",".reser_idx.",".user_like.",".reivew_idx.")";
+    mysqli_query($con, $sql);
+
+} else{
+$sql = "update review_like set user_like='".$user_like."' where user_idx = '".$user_like."' and reser_idx = '".$reser_idx."'";
+mysqli_query($con, $sql);
+}
+
+echo $sql;
+?>
+<script>
+    location.href="store_detail.html?store_idx=<?php echo $store_idx;?>";
+</script>

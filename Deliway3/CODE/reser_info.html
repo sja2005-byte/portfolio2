@@ -1,0 +1,277 @@
+<?php
+session_start();
+include "../config/db.php";
+
+$reser_idx = $_GET['reser_idx'];
+$sql = "select * from reser where reser_idx='".$reser_idx."'";
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_array($result);
+
+$sql1 = "select * from store where store_idx='".row['store_idx']."'";
+$result1 = mysqli_query($con,$sql1);
+$row1 = mysqli_fetch_array($result1);
+?>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이용 내역 상세</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/webfont.css">
+  <link rel="stylesheet" href="./css/slider.css">
+  <link rel="stylesheet" href="./css/reservation.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <script src="./js/likeButton.js" defer></script>
+  <script src="./js/modal.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./js/common.js" defer></script>
+  <script>
+    function btn(reser_idx){
+      confirm("예약을 취소하겠습니까?");
+      var reser_idx;
+      window.location="reser_cancle.php?reser_idx="+reser_idx;
+    }
+  </script>
+  <script>
+    function btn1(reser_idx){
+      confirm("예약을 신청하겠습니까?");
+      var reser_idx;
+      window.location="reser_ask.php?reser_idx="+reser_idx;
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1 class="hidden">이용내역 정보</h1>
+    <div class="header-btns">
+      <a href="#" onclick="goBack(event)" class="back-btn">back</a>
+      <button class="like">
+        <img class="like-icon1 active" src="../icon/like.png" alt="찜하기">
+        <img class="like-icon2" src="../icon/liked.png" alt="찜하기">
+        <span class="hidden">찜</span>
+      </button>
+      <i class="fa-solid fa-arrow-up-right-from-square share-btn"><span class="hidden">공유하기</span></i>
+    </div>
+
+    <div class="store-container">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="../images/pexels-can-i-gdeli-624966221-30748532.jpg" alt="main-slider1">
+          </div>
+          <div class="swiper-slide">
+            <img src="../images/pexels-yunus-kilic-55235055-30722200.jpg" alt="main-slider2">
+          </div>
+          <div class="swiper-slide">
+            <img src="../images/pexels-othmane-ettalbi-2148497459-30374243.jpg" alt="main-slider3">
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+      <script>
+        var swiper = new Swiper(".mySwiper", {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          loop: true,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+        });
+      </script>
+    </div>
+  </header>
+  <?php
+  $sql2 = "select count(*) as cnt from review where store_idx='".$row['store_idx']."'"; //해당 레코드의 갯수
+  $result2 = mysqli_query($con, $sql2);
+  $row2 = mysqli_fetch_array($result2);
+
+  $sql3 = "select sum(review_score) as ts from review where store_idx='".$row['store_idx']."'"; //해당필드의 함수
+  $result3 = mysqli_query($con, $sql3);
+  $row3 = mysqli_fetch_array($result3);
+
+  $total_score = $row3['ts']/$row2['cnt'];
+  ?>
+  <main>
+    <section class="title-section">
+      <h2 class="title">메타몽은 메타버스에서</h2>
+      <dl>
+        <dt>
+          <img class="rating" src="../icon/star.png" alt="평점"><span class="hidden">평점</span>
+        </dt><?php echo $row1['store_name'];?>&nbsp;&nbsp;
+        <?php
+        if ($total_score == "0"){?>
+          0.0
+          <?php } else {
+            echo number_format(round($total_score,1),1); } ?> &nbsp;&nbsp;리뷰 <?php echo number_format()
+          }
+        <dd>1.4</dd>
+        <dt>리뷰 </dt>
+        <dd>1,000</dd>
+        <!-- 매장 상세페이지(store_detail)로 이동 -->
+        <a href="#">상세보기</a>
+      </dl>
+    </section>
+
+    <section class="reser-section">
+      <h2 class="hidden">예약정보</h2>
+      <dl>
+        <dt>
+          <img src="../icon/reservation.png" alt=""><span>예약일시</span>
+        </dt>
+        <dd><?php echo $row['reser_day']; ?></dd>
+        <dt>
+          <img src="../icon/user.png" alt=""><span>예약자</span>
+        </dt>
+        <dd><?php echo $row['reser_name'];?></dd>
+        <dt>
+          <img src="../icon/people.png" alt=""><span>예약인원</span>
+        </dt>
+        <dd><?php echo $row['reser_number'];?>명</dd>
+        <dt>
+          <i class="fa-solid fa-pen-to-square"></i><span>요청사항</span>
+        </dt>
+        <dd><?php echo nl2br($row['reser_memo']);?></dd>
+        <dt><i class="fa-solid fa-car"></i><span>픽업서비스</span></dt>
+        <dd><input type="checkbox" name="reser_pickup" value="1" <?php if($row['reser_pickup'] == 1) {echo 'checked';} ?> disabled ></dd>
+      </dl>
+    </section>
+    <!-- 오시는 길 -->
+    <section class="map-section">
+      <h2 class="title">오시는 길</h2>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.3350067188517!2d127.03155294984232!3d37.50001615612253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca3fe3854fd13%3A0xdbb2d70b1648d2ce!2z6rWs6riA7L2U66as7JWEIOuzuOyCrA!5e0!3m2!1sko!2skr!4v1740631602548!5m2!1sko!2skr"
+          width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <input type="checkbox" name="reser_pickup">
+      <div class="store-location">
+        <div class="location-text">
+          <div class="gps"></div>
+          <p>가게의 위치가 나오는 영영</p>
+        </div>
+        <button>
+          <i class="fa-regular fa-copy"><span class="hidden">복사</span></i>
+        </button>
+      </div>
+      <!-- 지하철 넘버 -->
+      <div class="subway-container">
+        <div class="subway">
+          <div class="subway-1"></div>
+          <div class="subway-2"></div>
+          <p>서면역에서 352KM</p>
+        </div>
+        <div class="subway">
+          <div class="subway-1"></div>
+          <p>부암역에서 32KM</p>
+        </div>
+      </div>
+
+      <a href="#"><i class="fa-solid fa-paper-plane"></i><span>길찾기</span></a>
+    </section>
+
+    <!-- 픽업정보 -->
+    <section class="pickup-section">
+      <h2 class="title">픽업 정보</h2>
+      <div class="pickup-car-info">
+        <dl>
+          <dt>차량 모델</dt>
+          <dd class="sub-title2">경운기 (차량번호)</dd>
+        </dl>
+        <dl>
+          <dt>도착 예정</dt>
+          <dd class="sub-title2">오후 11:59</dd>
+        </dl>
+      </div>
+      <dl>
+        <dt>연락처</dt>
+        <dd class="sub-title2">000-0000-0000</dd>
+      </dl>
+    </section>
+
+    <div class="reservation-btns" id="reservation-btns">
+      <ul>
+        <li><button onclick="showConfirmModal(event)">예약취소</button></li>
+        <li><button onclick="showChangeModal(event)">예약변경</button></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <dl width="500">
+      <dt  class="sub-title2">안내 및 유의사항</dt>
+      <dd class="body1">&#42; 영업시간은 매장 사정에 따라 변경될 수 있습니다.</dd>
+      <dt class="sub-title2">환불정책</dt>
+      <dd class="body1">방문 1~3시간 전 취소 &rarr; 50% 환불</dd>
+      <dd class="body1">방문 시간 당일 2시간 전 &rarr; 환불 불가</dd>
+      <dd class="body1">
+        * 단 기상님이 이동을 시작한 이후에는 일부 추가비용이 발생합니다.
+      </dd>
+      <dd class="body1">
+        선결제 (앱 내 결제) &rarr; 결제 취소 후 카드사 경제 서비스 규정에 따라
+        3~5일 내 환불
+      </dd>
+      <dd class="body1">
+        현장 결제 &rarr; 매장 자체 환불 규정에 따름 (DELIWAY 직접 환불 불가)
+      </dd>
+      <dd class="body1">
+        포인트/쿠폰 사용 예약 &rarr; 포인트는 즉시 반환, 쿠폰은 복구 불가 할
+        수도 있음
+      </dd>
+      <dd class="body1">
+        간편 결제 (카카오페이, 네이버페이 등) &rarr; 취소 후 1~2일 내 환불
+      </dd>
+    </dl>
+  </footer>
+
+  <div id="cautionModal" class="modal">
+    <div class="modal-content">
+      <p class="small">예약을 취소하시겠습니까?</p>
+      <div class="delete-check">
+        <button class="cancleBtn" onclick="closeModal('cautionModal')">취소</button>
+        <a href="PHP/reser_cancle.php?reser_idx=<?php echo $row['reser_idx']; ?>">확인</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="reserveModal" class="modal">
+    <div class="modal-content">
+      <p class="small">예약을 복구하시겠습니까?</p>
+      <div class="restore-check">
+        <button class="cancleBtn" onclick="closeModal('cautionModal')">취소</button>
+        <a href="reser_restore.php?reser_idx=<?php echo $row['reser_idx']; ?>">확인</a>
+      </div>
+    </div>
+  </div>
+
+    <!-- <a href="PHP/reser_restore.php?reser_idx=<?php echo $row['reser_idx']; ?>">확인</a>  
+  <a href="#" onclick="btn1('<?php echo $row[reser_idx];?>')">예약신청</a>
+  <?php
+} else{
+?>
+} -->
+
+  <div id="completionModal" class="modal">
+    <div class="modal-content">
+      <p>환불요청이 완료 되었습니다.</p>
+      <button onclick="closeModal('completionModal'); goBack(event)">확인</button>
+    </div>
+  </div>
+
+  <div id="changeModal" class="modal">
+    <div class="modal-content">
+      <p>예약변경이 완료 되었습니다.</p>
+      <button onclick="closeModal('changeModal'); goBack(event);">확인</button>
+    </div>
+  </div>
+</body>
+
+</html>

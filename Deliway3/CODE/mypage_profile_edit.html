@@ -1,0 +1,95 @@
+<?php
+session_start();
+
+include "../config/db.php";
+
+$sql = "SELECT * from member where user_id = '".$_COOKIE['user_id']."'";
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_array($result);
+
+?>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 수정</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="css/webfont.css">
+    <link rel="stylesheet" href="./css/mypage_profile_edit.css">
+    <script src="./js/common.js" defer></script>
+    <!-- <script src="//cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script> -->
+    <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="page-header">
+            <a href="#" class="back" onclick="goBack(event)">
+                <i class="fa fa-angle-left icon"></i>
+                <span class="hidden">뒤로가기</span>
+            </a>
+            <h1 class="title">프로필 수정</h1>
+        </div>
+    </header>
+
+    <nav id="gnb">
+        <h2 class="hidden">주 메뉴</h2>
+        <ul>
+            <li><a href="./main.html" class="homeBtn">홈</a></li>
+            <li><a href="./search.html" class="searchBtn">검색</a></li>
+            <li><a href="./like_list.html" class="likeBtn">찜한 맛집</a></li>
+            <li><a href="./reser_list.html" class="reservationBtn">예약내역</a></li>
+            <li><a href="./mypage.html" class="mypageBtn">마이페이지</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2 class="hidden">프로필 수정 영역</h2>
+            <form action="./PHP/mypage_profile_edit.php" method="POST" enctype="multipart/form-data">
+                <div class="profile-container">
+                    <label for="file_input" class="profile-label">
+                        <input type="file" name="upfile[]" id="file_input" accept="image/*">
+                        <?php if (!empty($row['file_copied_0'])) { ?>
+                            <!-- 업로드된 프로필 이미지가 있을 경우 -->
+                            <img id="profile_preview" src="upload/<?php echo $row['file_copied_0']; ?>" alt="프로필 이미지">
+                        <?php } else { ?>
+                            <!-- 기본 프로필 이미지가 있을 경우 -->
+                            <img id="profile_preview" src="../images/profile.png" alt="기본 프로필 이미지">
+                        <?php } ?>
+                    </label>
+                </div>
+                <div>
+                    <label for="nickname">닉네임</label>
+                    <input type="text" placeholder="기존닉네임" value="<?php echo $row['user_name']; ?>"
+                        id="nickname" name="user_name" required>
+                </div>
+
+                <div>
+                    <label for="description">내 소개</label>
+                    <textarea name="editor1" id="description"><?php echo $row['user_intro']; ?></textarea>
+                </div>
+                <button type="submit" id="button" class="title">저장하기</button>
+            </form>
+        </section>
+
+        <script>
+            CKEDITOR.replace('editor1');
+            document.getElementById("file_input").addEventListener("change", function (event) {
+                const file = event.target.files[0]; // 사용자가 업로드한 파일
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById("profile_preview").src = e.target.result;
+                    };
+                    reader.readAsDataURL(file); // 파일을 읽고 미리보기 업데이트
+                }
+            });
+        </script>
+    </main>
+</body>
+
+</html>

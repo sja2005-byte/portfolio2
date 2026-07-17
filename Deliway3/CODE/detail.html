@@ -1,0 +1,39 @@
+<?php
+session_start();
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" action="reser_ok.php">
+        <input type="hidden" name="user_id" vakye="<?php echo $_COOKIE['user_id']?>">
+    <table border="1">
+        <tr><td colspan="2">업체명</td></tr>
+        <tr><td colspan="2">예약정보</td></tr>
+        <tr><td>예약일치</td>
+            <td><input type="date" name="reser_day"><input type="time" name="reser_time" min="<?php echo $row['store_weekday1']?>" max="<?php echo $row['store_weekday2']?>"></td>
+        </tr>
+        <tr><td>예약자</td>
+            <td><input type="text" name="reser_name" value="<?php echo $_COOKIE['user_name']?>"></td>
+        </tr>
+        <tr><td>예약인원</td>
+            <td><input type="number" name="reser_number"></td>
+        </tr>
+        <tr><td>요청사항</td>
+            <td><textarea name="reser_memo" id=""></textarea></td>
+        </tr>
+        <tr><td>픽업서비스 이용</td>
+            <td><input type="checkbox" name="reser_pickup" value="1" checked></td>
+        </tr>
+        <tr><td>탑승장소</td>
+        </tr>
+    </table>
+</form>
+    
+</body>
+</html>

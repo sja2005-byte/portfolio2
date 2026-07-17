@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>본인인증</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="css/webfont.css">
+    <link rel="stylesheet" href="./css/login_verification.css">
+    <script src="./js/common.js" defer></script>
+    <script src="../jquery/jquery-3.7.1.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"></script> -->
+    <script>
+        $(document).ready(function(e) {
+            $(".check").on("keyup",function(){
+                var self = $(this);
+                var user_id;
+
+                if(self.attr("id")==="user_id"){
+                    user_id = self.val();
+                }
+                $.post(
+                    "id_check.php", //파일경로
+                    {user_id : user_id}, //보낼자료
+                    function(data){
+                        if(data){
+                            self.parent().parent().find("div").html(data);
+                            self.parent().parent().find("div").css("color","red");
+                            
+                        }
+                    }
+                )
+            })
+        })
+    </script>
+    
+<script>
+    function inputPhoneNumber(obj) {
+    
+        var number = obj.value.replace(/[^0-9]/g, "");
+        var phone = "";
+    
+        if(number.length < 4) {
+            return number;
+        } else if(number.length < 7) {
+            phone += number.substr(0, 3);
+            phone += "-";
+            phone += number.substr(3);
+        } else if(number.length < 11) {
+            phone += number.substr(0, 3);
+            phone += "-";
+            phone += number.substr(3, 3);
+            phone += "-";
+            phone += number.substr(6);
+        } else {
+            phone += number.substr(0, 3);
+            phone += "-";
+            phone += number.substr(3, 4);
+            phone += "-";
+            phone += number.substr(7);
+        }
+        obj.value = phone;
+    }
+    </script>
+</head>
+
+<body>
+    <header>
+        <a href="#" onclick="goBack(event)"><i class="fas fa-angle-left" aria-hidden="true"></i><span class="hidden">뒤로가기</span></a>
+        <h1 class="hidden">본인인증</h1>
+    </header>
+    <main>
+        <form method="post" action="./PHP/login_verification_ok.php">
+            <div>
+                <input type="hidden" name="user_id" value="<?php echo $_GET['code'];?>">
+                <input type="hidden" name="code" value="<?php echo $_GET['code'];?>">
+                <?php
+                if ($_GET['code'] == ""){
+
+                }
+                <label class="login">이메일 주소를 입력해주세요
+                    <input type="email" name="user_id" placeholder="example@email.com" required class="check" id="user_id">
+                </label>
+                <button class="btn sub-title2" id="user-id">중복 확인</button>
+            </div>
+            <div>
+                <label class="login">전화번호를 입력해주세요
+                    <input type="tel" name="user_phone" placeholder="000-0000-0000 형식으로 입력하세요" input="autoHyphen(this)" maxlength="13" required onkeyup="inputPhoneNumber(this);" maxlength="13">
+                </label>
+                <!-- 자동 하이픈 생성 -->
+                <script>
+                    const autoHyphen = (target) => {
+                        target.value = target.value
+                        .replace(/[^0-9]/g,'')
+                        .replace(/^(\d{2,3})(\d{4,4})(\d{4})$/,`$1-$2-$3`);
+                    }
+                </script>
+            </div>
+            <div>
+                <?php
+            } else {
+                ?>
+                <label class="login">비밀번호를 입력해주세요
+                    <input type="password" name="user_pass" placeholder="비밀번호를 입력하세요" required>
+                    <span class="body1 hidden">비밀번호는 문자 숫자 특수문자의 조합으로 8자리 이상 입력해주세요.</span>
+                </label>
+                <label>
+                    <input type="password" name="user_pass1" placeholder="비밀번호 확인" required>
+                    <span class="body1 hidden">비밀번호가 맞지 않습니다. 다시 입력해주세요.</span>
+                </label>
+                <?php
+            }
+            ?>
+                <button type="submit" class="next title">다음</button>
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>
