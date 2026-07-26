@@ -18,17 +18,6 @@ include "../config/db.php";
 </head>
 
 <body>
-    <?php
-
-    $sql_member = "select * from member";
-    $result_member = mysqli_query($con,$sql_member);
-    $row_num_member = mysqli_num_rows($result_member); //레코드의 갯수
-
-    $sql_store = "select * from store";
-    $result_store = mysqli_query($con,$sql_store);
-    $row_num_store = mysqli_num_rows($result_store); //레코드의 갯수
-    
-    ?>
     <aside class="sidebar">
         <div class="logo">맛집관리</div>
         <ul class="nav-menu">
@@ -51,7 +40,7 @@ include "../config/db.php";
                 </a>
             </li>
             <li class="nav-item">
-                <a href="./manager-reservation.html" class="nav-link active">
+                <a href="./manager_reservation.html" class="nav-link active">
                     <i class="fas fa-calendar-alt"></i>
                     <span>예약 관리</span>
                 </a>
@@ -87,17 +76,7 @@ include "../config/db.php";
             $date = date("Y-m-d 00:00:00");
             $date1 = date("Y-m-d 23:59:59");
             
-            $sql2 = "SELECT * FROM reser WHERE reser_wdate >= '".$date."' and reser_wdate <= '".$date1."'";
-            $result2 = mysqli_query($con,$sql2);
-            $row_num2 = mysqli_num_rows($result2);
-
-            $sql3 = "SELECT * FROM review WHERE review_wdate >= '".$date."' and review_wdate <= '".$date1."'";
-            $result3 = mysqli_query($con,$sql3);
-            $row_num3 = mysqli_num_rows($result3);
-
-            $sql4 = "SELECT * FROM store ORDER BY store_idx desc LIMIT 5";
-            $result4 = mysqli_query($con,$sql4);
-            $row_num4 = mysqli_num_rows($result4);
+            
 
             ?>'
     <!-- 메인 컨텐츠 -->
