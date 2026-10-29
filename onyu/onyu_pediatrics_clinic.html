@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="온유 소아청소년과의원 - 아이의 건강한 성장과 부모님의 안심을 함께 생각합니다." />
+  <title>온유 소아청소년과의원 | ONYU PEDIATRICS CLINIC</title>
+
+  <style>
+    :root {
+      --green: #43b68f;
+      --green-dark: #279a76;
+      --green-soft: #eaf8f3;
+      --ink: #333536;
+      --muted: #737776;
+      --line: #e5ebe8;
+      --cream: #f8faf9;
+      --white: #ffffff;
+      --shadow: 0 20px 60px rgba(31, 76, 62, 0.10);
+      --radius: 22px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family:
+        "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo",
+        system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+      word-break: keep-all;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .container {
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    /* ---------- Header ---------- */
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(229,235,232,.7);
+      transition: .25s ease;
+    }
+
+    .header.scrolled {
+      box-shadow: 0 8px 30px rgba(31, 76, 62, .08);
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .brand-kor { font-size: 18px; }
+    .brand-en {
+      color: var(--muted);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .19em;
+      margin-left: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: #555a58;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 1px;
+      height: 2px;
+      background: var(--green);
+      transition: .25s ease;
+    }
+
+    .nav-links a:hover::after { right: 0; }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      color: var(--white);
+      background: var(--green);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(67,182,143,.22);
+    }
+
+    .menu-btn {
+      display: none;
+      border: 0;
+      background: transparent;
+      padding: 8px;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 23px;
+      height: 2px;
+      background: var(--ink);
+      margin: 5px 0;
+      border-radius: 4px;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      min-height: 780px;
+      padding: 150px 0 90px;
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 78% 26%, rgba(67,182,143,.11), transparent 25%),
+        linear-gradient(135deg, #ffffff 0%, #f7fbf9 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border: 1px solid rgba(67,182,143,.12);
+      border-radius: 50%;
+      right: -170px;
+      top: 80px;
+    }
+
+    .hero-grid {
+      min-height: 560px;
+      display: grid;
+      grid-template-columns: 1.03fr .97fr;
+      align-items: center;
+      gap: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--green);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(42px, 5.3vw, 72px);
+      line-height: 1.15;
+      letter-spacing: -.065em;
+      font-weight: 700;
+    }
+
+    .hero h1 .accent { color: var(--green); }
+
+    .hero-copy {
+      margin: 26px 0 34px;
+      color: #686e6b;
+      font-size: 16px;
+      max-width: 530px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 700;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: var(--white);
+      background: var(--green);
+      box-shadow: 0 12px 28px rgba(67,182,143,.25);
+    }
+
+    .btn-secondary {
+      color: #4f5552;
+      background: var(--white);
+      border-color: var(--line);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 510px;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-card {
+      width: min(100%, 500px);
+      aspect-ratio: 1 / 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+      border-radius: 48% 52% 54% 46% / 48% 45% 55% 52%;
+      background: var(--green-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 76%;
+      height: 76%;
+      border: 1px solid rgba(67,182,143,.22);
+      border-radius: 50%;
+    }
+
+    .logo-large {
+      width: 270px;
+      max-width: 58%;
+      height: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .floating {
+      position: absolute;
+      background: rgba(255,255,255,.95);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 17px;
+      box-shadow: 0 14px 35px rgba(40,75,64,.10);
+      font-size: 12px;
+      color: #646a67;
+    }
+
+    .floating strong {
+      display: block;
+      color: var(--ink);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .float-a { top: 36px; right: 3px; }
+    .float-b { left: 2px; bottom: 55px; }
+    .float-b strong { color: var(--green-dark); }
+
+    /* ---------- Common section ---------- */
+    section { scroll-margin-top: 90px; }
+
+    .section {
+      padding: 120px 0;
+    }
+
+    .section-head {
+      margin-bottom: 50px;
+    }
+
+    .section-label {
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 11px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.25;
+      letter-spacing: -.055em;
+    }
+
+    .section-desc {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 620px;
+    }
+
+    /* ---------- Brand story ---------- */
+    .story {
+      background: #fff;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 90px;
+      align-items: center;
+    }
+
+    .story-visual {
+      min-height: 430px;
+      padding: 35px;
+      background: var(--cream);
+      border-radius: 32px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-visual::before,
+    .story-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(67,182,143,.16);
+    }
+
+    .story-visual::before { width: 330px; height: 330px; }
+    .story-visual::after { width: 470px; height: 470px; }
+
+    .story-logo {
+      width: 220px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .story-content h3 {
+      margin: 0 0 18px;
+      font-size: 28px;
+      line-height: 1.4;
+      letter-spacing: -.045em;
+    }
+
+    .story-content h3 em {
+      color: var(--green-dark);
+      font-style: normal;
+    }
+
+    .story-content p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .value {
+      padding: 18px;
+      background: var(--green-soft);
+      border-radius: 17px;
+    }
+
+    .value b {
+      display: block;
+      color: var(--green-dark);
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .value span {
+      color: #707773;
+      font-size: 12px;
+    }
+
+    /* ---------- Services ---------- */
+    .services {
+      background: var(--cream);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .service {
+      min-height: 235px;
+      padding: 27px;
+      background: var(--white);
+      border: 1px solid #eaf0ed;
+      border-radius: var(--radius);
+      transition: .25s ease;
+    }
+
+    .service:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: rgba(67,182,143,.22);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 21px;
+      margin-bottom: 25px;
+    }
+
+    .service h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: -.035em;
+    }
+
+    .service p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ---------- Schedule ---------- */
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: 1fr .9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .schedule-card, .notice-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      background: var(--white);
+    }
+
+    .schedule-card h3, .notice-card h3 {
+      margin: 0 0 22px;
+      font-size: 20px;
+      letter-spacing: -.04em;
+    }
+
+    .hours {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours th, .hours td {
+      padding: 14px 4px;
+      border-bottom: 1px solid #edf1ef;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .hours th { color: #59605d; font-weight: 600; }
+    .hours td { color: var(--muted); text-align: right; }
+    .hours tr:last-child th, .hours tr:last-child td { border-bottom: 0; }
+
+    .notice-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .notice-list li {
+      display: flex;
+      gap: 10px;
+      padding: 12px 0;
+      border-bottom: 1px solid #edf1ef;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .notice-list li:last-child { border-bottom: 0; }
+    .notice-list li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    /* ---------- Appointment ---------- */
+    .appointment {
+      background: var(--green);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .appointment::before {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 50%;
+      right: -180px;
+      top: -230px;
+    }
+
+    .appointment-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 70px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .appointment .section-label { color: rgba(255,255,255,.8); }
+    .appointment .section-title { color: var(--white); }
+    .appointment .section-desc { color: rgba(255,255,255,.78); }
+
+    .contact-number {
+      display: inline-block;
+      margin-top: 28px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1;
+      letter-spacing: -.04em;
+      font-weight: 700;
+    }
+
+    .contact-sub {
+      display: block;
+      margin-top: 10px;
+      color: rgba(255,255,255,.7);
+      font-size: 12px;
+    }
+
+    .form-card {
+      background: var(--white);
+      color: var(--ink);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: 0 25px 60px rgba(20,90,67,.18);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #5d6360;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #dfe6e2;
+      border-radius: 12px;
+      padding: 12px 13px;
+      outline: none;
+      background: #fbfcfc;
+      color: var(--ink);
+      transition: .2s ease;
+    }
+
+    .field textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--green);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(67,182,143,.10);
+    }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 16px;
+      border: 0;
+      min-height: 50px;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .form-message {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: var(--green-dark);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* ---------- Location ---------- */
+    .location {
+      background: #fff;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .map-box {
+      min-height: 360px;
+      border-radius: 28px;
+      background:
+        linear-gradient(rgba(255,255,255,.72), rgba(255,255,255,.72)),
+        repeating-linear-gradient(45deg, #e8efec 0, #e8efec 1px, transparent 1px, transparent 28px),
+        repeating-linear-gradient(-45deg, #e8efec 0, #e8efec 1px, transparent 1px, transparent 28px);
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-pin {
+      width: 64px;
+      height: 64px;
+      border-radius: 50% 50% 50% 0;
+      background: var(--green);
+      transform: rotate(-45deg);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 15px 30px rgba(67,182,143,.25);
+    }
+
+    .map-pin::after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .location-info {
+      padding: 30px 0 30px 30px;
+    }
+
+    .location-info h3 {
+      margin: 0 0 25px;
+      font-size: 25px;
+      letter-spacing: -.045em;
+    }
+
+    .info-row {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .info-row:last-child { border-bottom: 0; }
+
+    .info-row b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      color: var(--green-dark);
+    }
+
+    .info-row span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer {
+      padding: 55px 0 30px;
+      background: #f4f7f6;
+      color: #707774;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #dfe6e2;
+    }
+
+    .footer-brand .brand-kor { color: var(--ink); }
+    .footer-desc {
+      margin: 12px 0 0;
+      max-width: 380px;
+      font-size: 12px;
+      color: #838985;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+      font-size: 12px;
+    }
+
+    .copyright {
+      padding-top: 22px;
+      font-size: 10px;
+      color: #969c99;
+      letter-spacing: .04em;
+    }
+
+    /* ---------- Logo SVG helpers ---------- */
+    .logo-svg .green { fill: var(--green); }
+    .logo-svg .dark { fill: var(--ink); }
+    .logo-svg .white { fill: #fff; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .nav-links {
+        position: fixed;
+        top: 78px;
+        left: 0;
+        right: 0;
+        display: none;
+        padding: 18px 24px 25px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        background: rgba(255,255,255,.97);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 12px 5px; }
+      .nav-cta { display: none; }
+      .menu-btn { display: block; }
+
+      .hero-grid,
+      .story-grid,
+      .appointment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 125px;
+      }
+
+      .hero-grid { gap: 50px; }
+      .hero-visual { min-height: 470px; }
+      .story-grid { gap: 45px; }
+      .service-grid { grid-template-columns: 1fr 1fr; }
+      .schedule-grid,
+      .location-grid { grid-template-columns: 1fr; }
+      .location-info { padding: 10px 0; }
+      .appointment-grid { gap: 40px; }
+    }
+
+    @media (max-width: 620px) {
+      .container { width: min(calc(100% - 32px), var(--max)); }
+      .nav { height: 68px; }
+      .nav-links { top: 68px; }
+
+      .brand-kor { font-size: 16px; }
+      .brand-en { display: none; }
+
+      .hero {
+        padding: 112px 0 65px;
+      }
+
+      .hero h1 { font-size: 43px; }
+      .hero-copy { font-size: 14px; }
+      .hero-visual { min-height: 390px; }
+      .hero-card { width: 90%; }
+      .logo-large { width: 210px; }
+      .float-a { top: 5px; right: 0; }
+      .float-b { left: 0; bottom: 10px; }
+
+      .section { padding: 80px 0; }
+      .section-head { margin-bottom: 34px; }
+
+      .values,
+      .service-grid,
+      .form-grid { grid-template-columns: 1fr; }
+
+      .field.full { grid-column: auto; }
+
+      .story-visual { min-height: 330px; }
+      .story-logo { width: 180px; }
+
+      .schedule-card, .notice-card, .form-card { padding: 23px; }
+
+      .footer-top {
+        flex-direction: column;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SVG logo: uploaded brand concept를 바탕으로 한 단일 파일용 벡터 로고 -->
+  <svg id="logoTemplate" width="0" height="0" aria-hidden="true">
+    <defs>
+      <g id="onyuMark">
+        <circle class="green" cx="55" cy="25" r="18"/>
+        <circle class="white" cx="55" cy="25" r="7"/>
+        <rect class="green" x="48" y="43" width="14" height="26" rx="7"/>
+        <rect class="green" x="25" y="61" width="61" height="13" rx="6.5"/>
+        <circle class="green" cx="70" cy="85" r="18"/>
+        <circle class="white" cx="70" cy="85" r="7"/>
+        <path class="green" d="M34 75 C31 106, 83 113, 98 86 C101 81, 108 84, 105 90 C90 121, 28 119, 24 84 L24 75 Z"/>
+        <circle class="green" cx="45" cy="111" r="6"/>
+        <rect class="green" x="64" y="103" width="11" height="24" rx="5.5"/>
+        <path class="green" d="M67 34 C72 18, 87 19, 92 28 C83 35, 75 36, 67 34 Z"/>
+        <path d="M66 34 C64 22, 62 18, 58 15" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+    </defs>
+  </svg>
+
+  <header class="header" id="header">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="온유 소아청소년과의원 홈">
+        <svg class="brand-mark logo-svg" viewBox="0 0 120 130" aria-hidden="true">
+          <use href="#onyuMark"></use>
+        </svg>
+        <span class="brand-kor">소아청소년과<small class="brand-en">ONYU PEDIATRICS CLINIC</small></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">병원소개</a>
+        <a href="#services">진료안내</a>
+        <a href="#hours">진료시간</a>
+        <a href="#appointment">예약문의</a>
+        <a href="#location">오시는 길</a>
+      </nav>
+
+      <a class="nav-cta" href="tel:0530000000">전화 문의</a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="메뉴 열기" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="home">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">ONYU PEDIATRICS CLINIC</div>
+          <h1>
+            아이의 오늘을<br />
+            <span class="accent">따뜻하게</span> 돌봅니다.
+          </h1>
+          <p class="hero-copy">
+            아이만 바라보는 부모님의 따뜻한 마음과 세심한 진료를 담았습니다.
+            아이가 건강하게 자라고, 가족 모두가 안심할 수 있는 병원을 지향합니다.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#appointment">진료 예약 문의 →</a>
+            <a class="btn btn-secondary" href="#about">온유 이야기 보기</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="온유 브랜드 로고">
+          <div class="hero-card">
+            <svg class="logo-large logo-svg" viewBox="0 0 240 280" aria-hidden="true">
+              <use href="#onyuMark" transform="translate(15, 15) scale(1.9)"></use>
+            </svg>
+
+            <div class="floating float-a">
+              <strong>밝음 · 새싹 · 소중함</strong>
+              아이의 성장과 건강을 생각합니다.
+            </div>
+
+            <div class="floating float-b">
+              <strong>ON YOU</strong>
+              내 손 안의 건강지킴이
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section story" id="about">
+      <div class="container story-grid">
+        <div class="story-visual">
+          <svg class="story-logo logo-svg" viewBox="0 0 240 280" aria-hidden="true">
+            <use href="#onyuMark" transform="translate(15, 15) scale(1.9)"></use>
+          </svg>
+        </div>
+
+        <div class="story-content">
+          <div class="section-label">BRAND STORY</div>
+          <h2 class="section-title">아이의 작은 성장까지<br /><em>소중하게</em> 바라봅니다.</h2>
+          <p>
+            ‘온유’는 아이를 향한 따뜻하고 부드러운 마음을 담은 이름입니다.
+            로고의 새싹과 웃는 형태는 아이들이 건강하게 자라나는 모습을 표현했습니다.
+          </p>
+          <p>
+            단순히 아픈 곳을 치료하는 것을 넘어, 아이와 부모님이 편안하게
+            이야기하고 믿고 찾을 수 있는 소아청소년과를 만들어갑니다.
+          </p>
+
+          <div class="values">
+            <div class="value">
+              <b>밝음</b>
+              <span>편안하고 긍정적인 진료</span>
+            </div>
+            <div class="value">
+              <b>새싹</b>
+              <span>건강한 성장과 발달</span>
+            </div>
+            <div class="value">
+              <b>소중함</b>
+              <span>한 아이 한 아이의 존중</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section services" id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">MEDICAL CARE</div>
+          <h2 class="section-title">온유의 진료 안내</h2>
+          <p class="section-desc">
+            성장하는 아이의 건강을 세심하게 살피고, 부모님이 이해하기 쉬운 진료를 제공합니다.
+          </p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service">
+            <div class="service-icon">♡</div>
+            <h3>소아청소년과 일반진료</h3>
+            <p>감기, 발열, 기침, 복통 등 아이에게 흔하게 나타나는 증상을 진료합니다.</p>
+          </article>
+
+          <article class="service">
+            <div class="service-icon">✚</div>
+            <h3>예방접종</h3>
+            <p>연령별 예방접종 일정에 맞춰 필요한 접종과 안내를 제공합니다.</p>
+          </article>
+
+          <article class="service">
+            <div class="service-icon">⌁</div>
+            <h3>성장·발달 상담</h3>
+            <p>아이의 성장과 발달 상태를 살피고 부모님의 궁금한 점을 함께 상담합니다.</p>
+          </article>
+
+          <article class="service">
+            <div class="service-icon">◌</div>
+            <h3>영유아 건강관리</h3>
+            <p>영유아 시기의 건강 상태를 꾸준히 확인하고 건강한 성장을 돕습니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hours -->
+    <section class="section" id="hours">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">OPENING HOURS</div>
+          <h2 class="section-title">진료시간 안내</h2>
+          <p class="section-desc">방문 전 진료시간을 확인해 주세요. 공휴일 및 임시 휴진은 별도 공지를 확인해 주세요.</p>
+        </div>
+
+        <div class="schedule-grid">
+          <div class="schedule-card">
+            <h3>진료시간</h3>
+            <table class="hours">
+              <tbody>
+                <tr><th>월요일</th><td>09:00 – 18:30</td></tr>
+                <tr><th>화요일</th><td>09:00 – 18:30</td></tr>
+                <tr><th>수요일</th><td>09:00 – 18:30</td></tr>
+                <tr><th>목요일</th><td>09:00 – 18:30</td></tr>
+                <tr><th>금요일</th><td>09:00 – 18:30</td></tr>
+                <tr><th>토요일</th><td>09:00 – 13:00</td></tr>
+                <tr><th>일요일 · 공휴일</th><td>휴진</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="notice-card">
+            <h3>방문 전 확인해 주세요</h3>
+            <ul class="notice-list">
+              <li>점심시간은 12:30 – 13:30입니다.</li>
+              <li>접수 마감 시간은 당일 상황에 따라 달라질 수 있습니다.</li>
+              <li>예방접종은 백신 재고 확인 후 방문해 주세요.</li>
+              <li>진료 일정은 병원 사정에 따라 변경될 수 있습니다.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Appointment -->
+    <section class="section appointment" id="appointment">
+      <div class="container appointment-grid">
+        <div>
+          <div class="section-label">CONTACT & RESERVATION</div>
+          <h2 class="section-title">아이의 건강,<br />편하게 문의하세요.</h2>
+          <p class="section-desc">
+            진료 예약 및 방문 관련 문의를 남겨주시면 확인 후 안내드리겠습니다.
+            실제 운영 시 아래 전화번호와 접수 시스템을 병원 정보에 맞게 변경해 주세요.
+          </p>
+
+          <a class="contact-number" href="tel:0530000000">053-000-0000</a>
+          <span class="contact-sub">대표전화 · 예시 번호 / 실제 번호로 교체</span>
+        </div>
+
+        <div class="form-card">
+          <form id="appointmentForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">보호자 성함</label>
+                <input id="name" name="name" type="text" placeholder="성함을 입력해 주세요" required />
+              </div>
+
+              <div class="field">
+                <label for="phone">연락처</label>
+                <input id="phone" name="phone" type="tel" placeholder="010-0000-0000" required />
+              </div>
+
+              <div class="field">
+                <label for="date">희망 방문일</label>
+                <input id="date" name="date" type="date" required />
+              </div>
+
+              <div class="field">
+                <label for="type">문의 유형</label>
+                <select id="type" name="type">
+                  <option>일반 진료</option>
+                  <option>예방접종</option>
+                  <option>성장·발달 상담</option>
+                  <option>기타 문의</option>
+                </select>
+              </div>
+
+              <div class="field full">
+                <label for="message">문의 내용</label>
+                <textarea id="message" name="message" placeholder="아이의 증상이나 문의사항을 간단히 적어주세요."></textarea>
+              </div>
+            </div>
+
+            <button class="form-submit" type="submit">예약 문의 남기기</button>
+            <p class="form-message" id="formMessage" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="section location" id="location">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-label">LOCATION</div>
+          <h2 class="section-title">오시는 길</h2>
+          <p class="section-desc">아래 주소는 디자인 예시입니다. 실제 병원 주소와 지도 링크로 교체해 주세요.</p>
+        </div>
+
+        <div class="location-grid">
+          <div class="map-box" aria-label="지도 위치 예시">
+            <div class="map-pin"></div>
+          </div>
+
+          <div class="location-info">
+            <h3>온유 소아청소년과의원</h3>
+
+            <div class="info-row">
+              <b>ADDRESS</b>
+              <span>대구광역시 중구 ○○로 00, 2층</span>
+            </div>
+
+            <div class="info-row">
+              <b>PHONE</b>
+              <span>053-000-0000</span>
+            </div>
+
+            <div class="info-row">
+              <b>TRANSPORTATION</b>
+              <span>지하철 ○호선 ○○역 도보 5분</span>
+            </div>
+
+            <div class="info-row">
+              <b>PARKING</b>
+              <span>건물 내 주차장 이용 가능 / 실제 운영 정보로 교체</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="brand">
+            <svg class="brand-mark logo-svg" viewBox="0 0 120 130" aria-hidden="true">
+              <use href="#onyuMark"></use>
+            </svg>
+            <span class="brand-kor">소아청소년과<small class="brand-en">ONYU PEDIATRICS CLINIC</small></span>
+          </div>
+          <p class="footer-desc">
+            아이의 건강한 성장과 가족의 편안한 일상을 함께 생각하는 소아청소년과의원.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#about">병원소개</a>
+          <a href="#services">진료안내</a>
+          <a href="#hours">진료시간</a>
+          <a href="#location">오시는 길</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        © <span id="year"></span> ONYU PEDIATRICS CLINIC. ALL RIGHTS RESERVED.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 모바일 메뉴
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", String(open));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // 스크롤 시 헤더 효과
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 20);
+    });
+
+    // 오늘 이전 날짜 선택 방지
+    const dateInput = document.getElementById("date");
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+
+    // 프론트엔드 예약 폼 동작
+    // 실제 운영 시 이 부분을 서버 API / DB / 문자·메일 발송 시스템과 연결하면 됩니다.
+    const form = document.getElementById("appointmentForm");
+    const message = document.getElementById("formMessage");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const date = document.getElementById("date").value;
+
+      if (!name || !phone || !date) {
+        message.textContent = "보호자 성함, 연락처, 희망 방문일을 입력해 주세요.";
+        return;
+      }
+
+      message.textContent =
+        `${name}님, 예약 문의가 접수되었습니다. 실제 운영 시 서버로 데이터를 전송하도록 연결해 주세요.`;
+
+      form.reset();
+      dateInput.min = `${yyyy}-${mm}-${dd}`;
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
